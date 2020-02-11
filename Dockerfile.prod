@@ -1,0 +1,17 @@
+FROM ruby:2.5.1
+ENV LANG C.UTF-8
+RUN apt-get update -qq && apt-get install -y build-essential nodejs
+RUN mkdir /myapp
+WORKDIR /myapp
+ADD Gemfile Gemfile.lock /myapp/
+
+ENV RAILS_ENV production
+
+ADD . /myapp
+
+RUN bundle install
+
+CMD \
+    bundle exec rails db:migrate && \
+    bundle exec rake assets:precompile && \
+    bundle exec rails s -p 3000 -b '0.0.0.0'
