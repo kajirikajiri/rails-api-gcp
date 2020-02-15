@@ -54,6 +54,9 @@ production:
   <<: *default
   adapter: mysql2
   encoding: utf8
-  database: myapp_production
+  database: dbname
+  port: 3306
+  url: mysql2://kajiri@127.0.0.1:3306/dbname
   host: <%= ENV["RAILS_DB_HOST"] %>
   username: <%= ENV["RAILS_DB_USER"] %>
+  password: <%= ENV["RAILS_DB_PASS"] %>

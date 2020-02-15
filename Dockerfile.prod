@@ -1,15 +1,14 @@
 FROM ruby:2.5.1
 ENV LANG C.UTF-8
-RUN apt-get update -qq && apt-get install -y build-essential nodejs
+ENV RAILS_ENV production
+RUN apt-get update -qq && apt-get install -y build-essential nodejs mysql-client
 RUN mkdir /myapp
 WORKDIR /myapp
 ADD Gemfile Gemfile.lock /myapp/
 
-ENV RAILS_ENV production
+RUN bundle install
 
 ADD . /myapp
-
-RUN bundle install
 
 CMD \
     bundle exec rails db:migrate && \

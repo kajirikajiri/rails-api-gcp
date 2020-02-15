@@ -20,6 +20,11 @@ spec:
                 secretKeyRef:
                   name: cloudsql
                   key: username
+            # - name: RAILS_DB_PASS
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: cloudsql-pass
+            #       key: password
             - name: SECRET_KEY_BASE
               value: 'hoge'
             - name: RAILS_ENV
@@ -31,9 +36,11 @@ spec:
               name: testapp
         - image: b.gcr.io/cloudsql-docker/gce-proxy:1.05
           name: cloudsql-proxy
-          command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                    "-instances=instance=tcp:3306",
-                    "-credential_file=/secrets/cloudsql/credentials.json"]
+          command: [
+            "/cloud_sql_proxy",
+            "--dir=/cloudsql",
+            "-instances=sixth-clone-267906:us-central1:instance-2=tcp:3306"
+          ]
           volumeMounts:
             - name: cloudsql-oauth-credentials
               mountPath: /secrets/cloudsql
