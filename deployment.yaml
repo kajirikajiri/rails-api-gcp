@@ -15,16 +15,19 @@ spec:
           env:
             - name: RAILS_DB_HOST
               value: 127.0.0.1
+              # value: 34.67.178.141
             - name: RAILS_DB_USER
+              # value: root
               valueFrom:
                 secretKeyRef:
                   name: cloudsql
                   key: username
-            # - name: RAILS_DB_PASS
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: cloudsql-pass
-            #       key: password
+            - name: RAILS_DB_PASS
+              # value: toor
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-pass
+                  key: password
             - name: SECRET_KEY_BASE
               value: 'hoge'
             - name: RAILS_ENV
@@ -34,23 +37,24 @@ spec:
           ports:
             - containerPort: 3000
               name: testapp
-        - image: b.gcr.io/cloudsql-docker/gce-proxy:1.05
+        - image: b.gcr.io/cloudsql-docker/gce-proxy:1.16
           name: cloudsql-proxy
           command: [
             "/cloud_sql_proxy",
-            "--dir=/cloudsql",
-            "-instances=sixth-clone-267906:us-central1:instance-2=tcp:3306"
+            # "--dir=/cloudsql",
+            "-instances=sixth-clone-267906:us-central1:instance-2=tcp:3306",
+            "-credential_file=/secrets/cloudsql/credentials.json"
           ]
           volumeMounts:
             - name: cloudsql-oauth-credentials
               mountPath: /secrets/cloudsql
               readOnly: true
-            - name: ssl-certs
-              mountPath: /etc/ssl/certs
+            # - name: ssl-certs
+            #   mountPath: /etc/ssl/certs
       volumes:
         - name: cloudsql-oauth-credentials
           secret:
             secretName: cloudsql-oauth-credentials
-        - name: ssl-certs
-          hostPath:
-            path: /etc/ssl/certs
+        # - name: ssl-certs
+        #   hostPath:
+        #     path: /etc/ssl/certs

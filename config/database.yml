@@ -56,7 +56,9 @@ production:
   encoding: utf8
   database: dbname
   port: 3306
-  url: mysql2://kajiri@127.0.0.1:3306/dbname
+  # host: 34.67.178.141
+  # username: root
+  # password: toor
   host: <%= ENV["RAILS_DB_HOST"] %>
   username: <%= ENV["RAILS_DB_USER"] %>
   password: <%= ENV["RAILS_DB_PASS"] %>

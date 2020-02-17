@@ -35,3 +35,11 @@ kubectl create -f deployment.yaml
 kubectl get pod
 kubectl logs
 ```
+
+めも
+なぜデプロイでErrorがでなくなったのか？
+firewallを設定した？
+
+kubernetesの操作のチュートリアルを見たから？
+https://cloud.google.com/kubernetes-engine/docs/concepts/secret
+
