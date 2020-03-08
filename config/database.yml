@@ -13,14 +13,14 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
+  username: kajiri
   host: '127.0.0.1'
 
 development:
   <<: *default
   database: myapp_development
   host: db
-  password: password　   # docker-compose.ymlのMYSQL_ROOT_PASSWORDで指定したもの
+  password: kajiri　   # docker-compose.ymlのMYSQL_ROOT_PASSWORDで指定したもの
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
