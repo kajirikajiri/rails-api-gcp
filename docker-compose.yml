@@ -11,13 +11,19 @@ services:
     depends_on:
       - db
   db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: password
+    image: gcr.io/cloudsql-docker/gce-proxy:1.16
+    command: ["/cloud_sql_proxy",
+              "-instances=skilled-bee-269209:us-east1:mysql=tcp:0.0.0.0:3306"]
     ports:
-      - '3306:3306'
-    volumes:
-      - mysql_data:/var/lib/mysql
+      - "3306:3306"
+  # db:
+  #   image: mysql:5.7
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #   ports:
+  #     - '3306:3306'
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
 volumes:
   bundle:
   mysql_data:
