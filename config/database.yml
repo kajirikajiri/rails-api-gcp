@@ -20,7 +20,7 @@ development:
   <<: *default
   database: myapp_development
   host: db
-  password: kajiri　   # docker-compose.ymlのMYSQL_ROOT_PASSWORDで指定したもの
+  password: kajiri # docker-compose.ymlのMYSQL_ROOT_PASSWORDで指定したもの
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -29,7 +29,7 @@ test:
   <<: *default
   database: myapp_test
   host: db
-  password: password　   # docker-compose.ymlのMYSQL_ROOT_PASSWORDで指定したもの
+  password: password # docker-compose.ymlのMYSQL_ROOT_PASSWORDで指定したもの
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
